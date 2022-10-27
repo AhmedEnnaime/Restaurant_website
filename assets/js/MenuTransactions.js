@@ -140,21 +140,30 @@ function displayCart(){
             
             
           </li>
-          <div class="cart-btn-group">
+          
+            `
+        })
+        productContainer.innerHTML += `
+        <div class="cart-btn-group">
           <div class="cart-total">
             <strong class="cart-total-title">Total</strong>
             <span class="cart-total-price">$ ${cartCost}</span>
           </div>
           <button class="btn btn-primary">Order</button>
         </div>
-            `
-        })
+
+        `
 
     }
+    const orderButton = productContainer.querySelector('.btn-primary');
+    console.log(orderButton);
+    orderButton.addEventListener('click',()=>{
+        localStorage.clear()
+        alert('Thank you for your order')
+    })
 
 }
-// const orderButton = document.querySelector('.btn-primary');
-// console.log(orderButton);
+
 
 onLoadCartNumbers()
 displayCart()
