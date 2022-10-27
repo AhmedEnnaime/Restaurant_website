@@ -114,18 +114,47 @@ function totalCost(product){
 
 function displayCart(){
     let cartItems = localStorage.getItem('productsInCart');
-    let productContainer = document.querySelector('.cart-box-ul')
+    let productContainer = document.querySelector('.cart-box')
+    let cartCost = localStorage.getItem('totalCost')
     cartItems = JSON.parse(cartItems)
-    console.log(cartItems);
     if(cartItems && productContainer){
         productContainer.innerHTML = ``;
         Object.values(cartItems).map(item=>{
+            productContainer.innerHTML += `
+            <li class="cart-row">
+            <a href="#" class="cart-item">
+              <div class="img-box">
+                <img src="./assets/images/the-pizza-gf94d9f355_1920-removebg-preview.png" alt="product image" class="product-img" width="50" height="50"
+                  loading="lazy">
+              </div>
+          
+              <h5 class="product-name">${item.name}</h5>
+              <div class="cart-quantity cart-column">
+                <input class="cart-quantity-input" type="number" value="${item.inCart}">
+              </div>
+              <p class="product-price">
+                $ ${item.price * item.inCart}
+              </p>
+              <button class="btn btn-danger" type="button">REMOVE</button>
+            </a>
             
+            
+          </li>
+          <div class="cart-btn-group">
+          <div class="cart-total">
+            <strong class="cart-total-title">Total</strong>
+            <span class="cart-total-price">$ ${cartCost}</span>
+          </div>
+          <button class="btn btn-primary">Order</button>
+        </div>
+            `
         })
 
     }
 
 }
+// const orderButton = document.querySelector('.btn-primary');
+// console.log(orderButton);
 
 onLoadCartNumbers()
 displayCart()
