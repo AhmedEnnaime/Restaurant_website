@@ -56,6 +56,7 @@ for(let i=0;i<carts.length;i++){
     carts[i].addEventListener('click',()=>{
         cardNumbers(products[i])
         totalCost(products[i])
+        displayCart()
     })
 }
 
@@ -111,10 +112,9 @@ function totalCost(product){
     }
     
 }
-
+let productContainer = document.querySelector('.cart-box')
 function displayCart(){
     let cartItems = localStorage.getItem('productsInCart');
-    let productContainer = document.querySelector('.cart-box')
     let cartCost = localStorage.getItem('totalCost')
     cartItems = JSON.parse(cartItems)
     if(cartItems && productContainer){
@@ -142,6 +142,11 @@ function displayCart(){
           </li>
           
             `
+            let quantity = productContainer.getElementsByClassName('cart-quantity-input');
+            console.log(quantity.value);
+            item.inCart = quantity.value
+
+
         })
         productContainer.innerHTML += `
         <div class="cart-btn-group">
@@ -155,15 +160,33 @@ function displayCart(){
         `
 
     }
+
+    
+    // quantity.forEach((qte)=>{
+    //     if(isNaN(qte.value) || qte.value <= 0){
+    //         qte.value = 1;
+    //     }
+    // })
     const orderButton = productContainer.querySelector('.btn-primary');
-    console.log(orderButton);
     orderButton.addEventListener('click',()=>{
         localStorage.clear()
         alert('Thank you for your order')
     })
 
 }
+let removeButton = productContainer.querySelectorAll('.btn-danger');
+console.log(removeButton);
+// function removeItem(){
+//     let cartItems = localStorage.getItem('productsInCart');
+    
+//     if(cartItems && productContainer){
 
+//         Object.values(cartItems).map(item=>{
+            
+
+//         })
+//     }
+// }
 
 onLoadCartNumbers()
 displayCart()
