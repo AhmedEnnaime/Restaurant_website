@@ -148,7 +148,7 @@ function displayCart(){
           
               <h5 class="product-name">${item.name}</h5>
               <div class="cart-quantity cart-column">
-                <input class="cart-quantity-input" type="number" value="${item.inCart}">
+                <span class="cart-quantity-input">${item.inCart}</span>
               </div>
               <p class="product-price">
                 $ ${item.price * item.inCart}
@@ -179,26 +179,26 @@ function displayCart(){
 
     }
 
-    
-    // quantity.forEach((qte)=>{
-    //     if(isNaN(qte.value) || qte.value <= 0){
-    //         qte.value = 1;
-    //     }
-    // })
     const orderButton = productContainer.querySelector('.btn-primary');
     orderButton.addEventListener('click',()=>{
         localStorage.clear()
         alert('Thank you for your order')
+        document.querySelector('.count').textContent = 0
+        productContainer.remove()
     })
 
     let removeButton = productContainer.querySelectorAll('.btn-danger');
-    // console.log(removeButton);
     for(let danger of removeButton){
-        for(i=0;i<products.length;i++){
-            danger.addEventListener('click',()=>{
-                console.log(products[i].name);
-                localStorage.removeItem(products[i]);
-            })
+        for(let z=0;z<products.length;z++){
+            // console.log(products[z].name, danger.parentElement.childNodes[3].textContent);
+            // danger.addEventListener('click',()=>{
+            //     console.log(products[z].name);
+                
+            //     if(products[z].name === danger.parentElement.childNodes[3].textContent){
+            //         products = products.filter((item)=> item.name === products[z].name)
+            //     }
+                
+            // })
         }
     }
 
