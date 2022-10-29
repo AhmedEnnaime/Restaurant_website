@@ -190,15 +190,17 @@ function displayCart(){
     let removeButton = productContainer.querySelectorAll('.btn-danger');
     for(let danger of removeButton){
         for(let z=0;z<products.length;z++){
-            // console.log(products[z].name, danger.parentElement.childNodes[3].textContent);
-            // danger.addEventListener('click',()=>{
-            //     console.log(products[z].name);
+            console.log(products[z].name, danger.parentElement.childNodes[3].textContent);
+            danger.addEventListener('click',()=>{
+                console.log(products[z].name);
                 
-            //     if(products[z].name === danger.parentElement.childNodes[3].textContent){
-            //         products = products.filter((item)=> item.name === products[z].name)
-            //     }
+                if(products[z].name === danger.parentElement.childNodes[3].textContent){
+                   console.log('ggggggg');
+                   
+                }
                 
-            // })
+            })
+            localStorage.setItem('productsInCart',JSON.stringify(cartItems));
         }
     }
 
