@@ -1,15 +1,19 @@
 let carts = document.querySelectorAll('.food-menu-btn');
+let imgSrc;
+
 let products = [
     {
         name: 'Pizza fruits de mer',
         categorie: 'Pizza',
         price: 49,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'pizza viande hachee',
         categorie: 'Pizza',
         price: 29,
+        image: imgSrc,
         inCart: 0
     },
     
@@ -17,40 +21,54 @@ let products = [
         name: 'White Castle Pizzas',
         categorie: 'Pizza',
         price: 60,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'Ramen',
         categorie: 'Suchi',
         price: 59,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'Suchi boiled',
         categorie: 'Suchi',
         price: 55,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'Burger poulet',
         categorie: 'Burger',
         price: 70,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'Orange juice',
         categorie: 'Drink',
         price: 20,
+        image: imgSrc,
         inCart: 0
     },
     {
         name: 'Panache',
         categorie: 'Drink',
         price: 25,
+        image: imgSrc,
         inCart: 0
     }
     
 ];
+
+for(let card of carts){
+    for(let i = 0; i<products.length;i++){
+       if(products[i].name === card.parentElement.parentElement.childNodes[5].innerText){
+        products[i].image = card.parentElement.childNodes[1].src
+       }
+    }
+}
 
 for(let i=0;i<carts.length;i++){
     carts[i].addEventListener('click',()=>{
@@ -124,7 +142,7 @@ function displayCart(){
             <li class="cart-row">
             <a href="#" class="cart-item">
               <div class="img-box">
-                <img src="./assets/images/the-pizza-gf94d9f355_1920-removebg-preview.png" alt="product image" class="product-img" width="50" height="50"
+                <img src="${item.image}" alt="product image" class="product-img" width="50" height="50"
                   loading="lazy">
               </div>
           
@@ -142,9 +160,9 @@ function displayCart(){
           </li>
           
             `
-            let quantity = productContainer.getElementsByClassName('cart-quantity-input');
-            console.log(quantity.value);
-            item.inCart = quantity.value
+            // let quantity = productContainer.getElementsByClassName('cart-quantity-input');
+            // console.log(quantity.value);
+            // item.inCart = quantity.value
 
 
         })
@@ -173,20 +191,18 @@ function displayCart(){
         alert('Thank you for your order')
     })
 
+    let removeButton = productContainer.querySelectorAll('.btn-danger');
+    // console.log(removeButton);
+    for(let danger of removeButton){
+        for(i=0;i<products.length;i++){
+            danger.addEventListener('click',()=>{
+                console.log(products[i].name);
+                localStorage.removeItem(products[i]);
+            })
+        }
+    }
+
 }
-let removeButton = productContainer.querySelectorAll('.btn-danger');
-console.log(removeButton);
-// function removeItem(){
-//     let cartItems = localStorage.getItem('productsInCart');
-    
-//     if(cartItems && productContainer){
-
-//         Object.values(cartItems).map(item=>{
-            
-
-//         })
-//     }
-// }
 
 onLoadCartNumbers()
 displayCart()

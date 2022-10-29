@@ -619,8 +619,12 @@ button { cursor: pointer; }
 .logo-content h2{
   margin-top: 20px;
   margin-left: 20px;
-  color: white;
+  color: black;
   font-size: 30px;
+}
+.logo-content h1{
+  color: white;
+  padding-top: 20px;
 }
 
 .nav-link:hover { color: var(--saffron); }
