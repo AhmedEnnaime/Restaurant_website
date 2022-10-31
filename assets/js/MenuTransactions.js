@@ -194,21 +194,23 @@ function displayCart(){
     test= Object.keys(cartItems).map((key) => cartItems[key]);
     for(let danger of removeButton){
         for(let z=0;z<test.length;z++){
+            // console.log(test[z].name,danger.parentElement.childNodes[3].textContent);
             danger.addEventListener('click',()=>{
-                // console.log(products[z].name);
-                // console.log(AllProducts);
-                // console.log(typeof AllProducts[0]);
-                // console.log(danger.parentElement.childNodes[3].textContent);
-                // console.log(AllProducts[0][danger.parentElement.childNodes[3].textContent].name,danger.parentElement.childNodes[3].textContent);
-                // console.log(test[z].name);
                 if(test[z].name === danger.parentElement.childNodes[3].textContent){
-                    console.log('truee');
-                    // console.log(AllProducts[0]);
                    test = test.filter((item)=>item.name !== danger.parentElement.childNodes[3].textContent)
                    console.log(test);
                    danger.parentElement.remove()
                    localStorage.setItem('productsInCart',JSON.stringify(test));
-                   
+
+                   let cartPrices = localStorage.getItem('totalPrice');
+                   console.log(test[z].name,test[z].price);
+                   if(cartPrices!= null){
+                    cartPrices = parseInt(cartPrices)
+                    localStorage.setItem('totalPrice',cartPrices+test[z].price)
+                   }else{
+                    localStorage.setItem('totalPrice',test[z].price)
+                   }
+                   console.log(cartPrices);
                    
                 }
                 
