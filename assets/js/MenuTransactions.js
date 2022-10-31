@@ -98,7 +98,6 @@ function cardNumbers(product){
     setItems(product)
 }
 let AllProducts = [];
-let cartContents;
 function setItems(product){
    let cartItems = localStorage.getItem('productsInCart');
    cartItems = JSON.parse(cartItems)
@@ -117,16 +116,8 @@ function setItems(product){
     }
 
    }
-    console.log(cartItems);
     localStorage.setItem('productsInCart', JSON.stringify(cartItems))
     AllProducts = [cartItems]
-    console.log(AllProducts[0]["Pizza fruits de mer"].name);
-    console.log(cartItems["Pizza fruits de mer"].name);
-    cartItems.foreach((cart)=>{
-        cartContents = JSON.parse(cart)
-        AllProducts.push(cartContents)
-    })
-    console.log(cartContents,AllProducts);
     
    
 }
@@ -201,22 +192,22 @@ function displayCart(){
     let removeButton = productContainer.querySelectorAll('.btn-danger');
     for(let danger of removeButton){
         for(let z=0;z<AllProducts.length;z++){
-            
-            // console.log(products[z].name, danger.parentElement.childNodes[3].textContent);
             danger.addEventListener('click',()=>{
                 // console.log(products[z].name);
-                console.log(AllProducts);
-                console.log(typeof AllProducts[0]);
+                // console.log(AllProducts);
+                // console.log(typeof AllProducts[0]);
                 // console.log(danger.parentElement.childNodes[3].textContent);
-                // danger.parentElement.remove()
-                if(AllProducts[z].name === danger.parentElement.childNodes[3].textContent){
-                   console.log('ggggggg');
-                //    AllProducts = AllProducts.filter((item)=>item.name !== danger.parentElement.childNodes[3].textContent)
+                console.log(AllProducts[0][danger.parentElement.childNodes[3].textContent].name,danger.parentElement.childNodes[3].textContent);
+                if(AllProducts[0][danger.parentElement.childNodes[3].textContent].name === danger.parentElement.childNodes[3].textContent){
+                    console.log('truee');
+                    // console.log(AllProducts[0]);
+                //    AllProducts[0][danger.parentElement.childNodes[3].textContent] = AllProducts[0][danger.parentElement.childNodes[3].textContent].filter((item)=>item.name !== danger.parentElement.childNodes[3].textContent)
+                   // danger.parentElement.remove()
                    
                 }
                 
             })
-            // localStorage.setItem('productsInCart',JSON.stringify(AllProducts));
+            // localStorage.setItem('productsInCart',JSON.stringify(AllProducts[0]));
         }
     }
 
