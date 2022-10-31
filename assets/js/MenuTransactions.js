@@ -98,6 +98,7 @@ function cardNumbers(product){
     setItems(product)
 }
 let AllProducts = [];
+let test = []
 function setItems(product){
    let cartItems = localStorage.getItem('productsInCart');
    cartItems = JSON.parse(cartItems)
@@ -117,10 +118,11 @@ function setItems(product){
 
    }
     localStorage.setItem('productsInCart', JSON.stringify(cartItems))
-    AllProducts = [cartItems]
     
-   
+    // console.log(arr);
+    // AllProducts = [cartItems]
 }
+
 
 function totalCost(product){
     let cartCost = localStorage.getItem('totalCost')
@@ -180,7 +182,6 @@ function displayCart(){
         `
 
     }
-
     const orderButton = productContainer.querySelector('.btn-primary');
     orderButton.addEventListener('click',()=>{
         localStorage.clear()
@@ -188,31 +189,44 @@ function displayCart(){
         document.querySelector('.count').textContent = 0
         productContainer.remove()
     })
-
+    // console.log(test[0]);
     let removeButton = productContainer.querySelectorAll('.btn-danger');
+    test= Object.keys(cartItems).map((key) => cartItems[key]);
     for(let danger of removeButton){
-        for(let z=0;z<AllProducts.length;z++){
+        for(let z=0;z<test.length;z++){
             danger.addEventListener('click',()=>{
                 // console.log(products[z].name);
                 // console.log(AllProducts);
                 // console.log(typeof AllProducts[0]);
                 // console.log(danger.parentElement.childNodes[3].textContent);
-                console.log(AllProducts[0][danger.parentElement.childNodes[3].textContent].name,danger.parentElement.childNodes[3].textContent);
-                if(AllProducts[0][danger.parentElement.childNodes[3].textContent].name === danger.parentElement.childNodes[3].textContent){
+                // console.log(AllProducts[0][danger.parentElement.childNodes[3].textContent].name,danger.parentElement.childNodes[3].textContent);
+                // console.log(test[z].name);
+                if(test[z].name === danger.parentElement.childNodes[3].textContent){
                     console.log('truee');
                     // console.log(AllProducts[0]);
-                //    AllProducts[0][danger.parentElement.childNodes[3].textContent] = AllProducts[0][danger.parentElement.childNodes[3].textContent].filter((item)=>item.name !== danger.parentElement.childNodes[3].textContent)
-                   // danger.parentElement.remove()
+                   test = test.filter((item)=>item.name !== danger.parentElement.childNodes[3].textContent)
+                   console.log(test);
+                   danger.parentElement.remove()
+                   localStorage.setItem('productsInCart',JSON.stringify(test));
+                   
                    
                 }
                 
             })
-            // localStorage.setItem('productsInCart',JSON.stringify(AllProducts[0]));
+            
         }
     }
 
 }
 
-
+// function somme(){
+//     let cartCost = localStorage.getItem('totalCost')
+//     if(cartCost != null){
+//         cartCost = parseInt(cartCost)
+//         localStorage.setItem('totalCost',cartCost+test.price)
+//     }else{
+//         localStorage.setItem('totalCost',test.price)
+//     }
+// }
 onLoadCartNumbers()
 displayCart()
