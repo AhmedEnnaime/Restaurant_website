@@ -874,24 +874,24 @@ button { cursor: pointer; }
 .food-1 {
   top:  25%;
   left: -4%;
-  animation: scaleUp 3s ease-in-out infinite;
+ 
 }
 
 .food-2 {
   top:    0;
   right: -4%;
-  animation: scaleUp 2s ease-in-out infinite;
+ 
 }
 
 .food-3 {
   bottom: -4%;
   right:  -4%;
-  animation: scaleUp 4s ease-in-out infinite;
+  
 }
 
 .dialog {
   position: absolute;
-  filter: drop-shadow(0px 2px 46px hsla(0, 0%, 0%, 0.4));
+  
 }
 
 .dialog-1 {
@@ -906,61 +906,38 @@ button { cursor: pointer; }
 
 .shape {
   position: absolute;
-  filter: drop-shadow(0px 3px 6px hsla(0, 0%, 0%, 0.1));
+ 
 }
 
 .shape-1 {
   top:  0;
   left: 5%;
-  animation: scaleUp 2s 3s ease-in-out infinite;
+
 }
 
 .shape-2 {
   right: 0;
   top:  55%;
-  animation: scaleUp 3s 4s ease-in-out infinite;
+  
 }
 
 .shape-3 {
   bottom: 5%;
   left:   5%;
-  animation: scaleUp 3s 1s ease-in-out infinite;
+  
 }
 
 .shape-4 {
   top:  35%;
   right: 0;
-  animation: moveUp 3s 1s ease-in-out infinite;
+  
 }
 
 .shape-5 {
   top: 60%;
   left: 0;
-  animation: moveUp 3s ease-in-out infinite;
+ 
 }
-
-
-@keyframes scaleUp {
-
-  0%,
-  100% { transform: translateY(0) scale(1); }
-
-  50% { transform: translateY(-5px) scale(1.05);}
-
-}
-
-
-@keyframes moveUp {
-
-  0%,
-  100% { transform: translateY(0); }
-  20%  { transform: translateY(-3px); }
-  50%  { transform: translateY(-8px); }
-
-}
-
-
-
 
 
 /*-----------------------------------*\ 

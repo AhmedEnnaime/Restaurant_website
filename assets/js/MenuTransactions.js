@@ -97,8 +97,7 @@ function cardNumbers(product){
     }
     setItems(product)
 }
-let AllProducts = [];
-let test = []
+
 function setItems(product){
    let cartItems = localStorage.getItem('productsInCart');
    cartItems = JSON.parse(cartItems)
@@ -137,7 +136,7 @@ function displayCart(){
     let cartItems = localStorage.getItem('productsInCart');
     let cartCost = localStorage.getItem('totalCost')
     cartItems = JSON.parse(cartItems)
-    if(cartItems && productContainer){
+    if(cartItems){
         productContainer.innerHTML = ``;
         Object.values(cartItems).map(item=>{
             productContainer.innerHTML += `
