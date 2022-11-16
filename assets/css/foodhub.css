@@ -685,11 +685,6 @@ button { cursor: pointer; }
   transition: 0.25s ease;
 }
 
-.menu-toggle-btn.active .one { transform: translateY(7px) rotate(-45deg); }
-
-.menu-toggle-btn.active .two { transform: rotate(45deg); }
-
-.menu-toggle-btn.active .three { transform: translateY(-7px) rotate(-45deg); }
 
 .cart-box {
   position: fixed;

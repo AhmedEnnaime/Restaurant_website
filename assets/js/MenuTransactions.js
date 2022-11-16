@@ -1,149 +1,152 @@
-let carts = document.querySelectorAll('.food-menu-btn');
+let carts = document.querySelectorAll(".food-menu-btn");
 let imgSrc;
 
 let products = [
-    {
-        name: 'Pizza fruits de mer',
-        categorie: 'Pizza',
-        price: 49,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'pizza viande hachee',
-        categorie: 'Pizza',
-        price: 29,
-        image: imgSrc,
-        inCart: 0
-    },
-    
-    {
-        name: 'White Castle Pizzas',
-        categorie: 'Pizza',
-        price: 60,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'Ramen',
-        categorie: 'Suchi',
-        price: 59,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'Suchi boiled',
-        categorie: 'Suchi',
-        price: 55,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'Burger poulet',
-        categorie: 'Burger',
-        price: 70,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'Orange juice',
-        categorie: 'Drink',
-        price: 20,
-        image: imgSrc,
-        inCart: 0
-    },
-    {
-        name: 'Panache',
-        categorie: 'Drink',
-        price: 25,
-        image: imgSrc,
-        inCart: 0
-    }
-    
+  {
+    name: "Pizza fruits de mer",
+    categorie: "Pizza",
+    price: 49,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "pizza viande hachee",
+    categorie: "Pizza",
+    price: 29,
+    image: imgSrc,
+    inCart: 0,
+  },
+
+  {
+    name: "White Castle Pizzas",
+    categorie: "Pizza",
+    price: 60,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "Ramen",
+    categorie: "Suchi",
+    price: 59,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "Suchi boiled",
+    categorie: "Suchi",
+    price: 55,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "Burger poulet",
+    categorie: "Burger",
+    price: 70,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "Orange juice",
+    categorie: "Drink",
+    price: 20,
+    image: imgSrc,
+    inCart: 0,
+  },
+  {
+    name: "Panache",
+    categorie: "Drink",
+    price: 25,
+    image: imgSrc,
+    inCart: 0,
+  },
 ];
 
-for(let card of carts){
-    for(let i = 0; i<products.length;i++){
-       if(products[i].name === card.parentElement.parentElement.childNodes[5].innerText){
-        products[i].image = card.parentElement.childNodes[1].src
-       }
+for (let card of carts) {
+  for (let i = 0; i < products.length; i++) {
+    if (
+      products[i].name ===
+      card.parentElement.parentElement.childNodes[5].innerText
+    ) {
+      products[i].image = card.parentElement.childNodes[1].src;
     }
+  }
 }
 
-for(let i=0;i<carts.length;i++){
-    carts[i].addEventListener('click',()=>{
-        cardNumbers(products[i])
-        totalCost(products[i])
-        displayCart()
-    })
+for (let i = 0; i < carts.length; i++) {
+  carts[i].addEventListener("click", () => {
+    cardNumbers(products[i]);
+    totalCost(products[i]);
+    displayCart();
+  });
 }
 
-function onLoadCartNumbers(){
-    let productNumbers = localStorage.getItem('cartNumbers');
-    if(productNumbers){
-        document.querySelector('.count').textContent = productNumbers
-    }
+function onLoadCartNumbers() {
+  let productNumbers = localStorage.getItem("cartNumbers");
+  if (productNumbers) {
+    document.querySelector(".count").textContent = productNumbers;
+  }
 }
 
-function cardNumbers(product){
-    let productNumbers = localStorage.getItem('cartNumbers');
-    productNumbers = parseInt(productNumbers)
-    if(productNumbers){
-        localStorage.setItem('cartNumbers',productNumbers + 1);
-        document.querySelector('.count').textContent = productNumbers + 1;
-    }else{
-        localStorage.setItem('cartNumbers', 1);
-        document.querySelector('.count').textContent = 1;
-    }
-    setItems(product)
+function cardNumbers(product) {
+  let productNumbers = localStorage.getItem("cartNumbers");
+  productNumbers = parseInt(productNumbers);
+  if (productNumbers) {
+    localStorage.setItem("cartNumbers", productNumbers + 1);
+    document.querySelector(".count").textContent = productNumbers + 1;
+  } else {
+    localStorage.setItem("cartNumbers", 1);
+    document.querySelector(".count").textContent = 1;
+  }
+  addToCart(product);
 }
-
-function setItems(product){
-   let cartItems = localStorage.getItem('productsInCart');
-   cartItems = JSON.parse(cartItems)
-   if(cartItems!=null){
-    if(cartItems[product.name] == undefined){
-        cartItems = {
-            ...cartItems,
-            [product.name]: product
-        }
+// let cartItems = localStorage.getItem('productsInCart');
+// cartItems = JSON.parse(cartItems)
+// console.log(cartItems);
+function addToCart(product) {
+  let cartItems = localStorage.getItem("productsInCart");
+  cartItems = JSON.parse(cartItems);
+  if (cartItems != null) {
+    if (cartItems[product.name] == undefined) {
+      cartItems = {
+        ...cartItems,
+        [product.name]: product,
+      };
+     
     }
-    cartItems[product.name].inCart += 1;
-   }else{
+    cartItems[product.name].inCart++;
+  } else {
     product.inCart = 1;
     cartItems = {
-        [product.name]: product
-    }
-
-   }
-    localStorage.setItem('productsInCart', JSON.stringify(cartItems))
-    
+      [product.name]: product,
+    };
+  }
+  localStorage.setItem("productsInCart", JSON.stringify(cartItems));
 }
 
-
-function totalCost(product){
-    let cartCost = localStorage.getItem('totalCost')
-    if(cartCost != null){
-        cartCost = parseInt(cartCost)
-        localStorage.setItem('totalCost',cartCost+product.price)
-    }else{
-        localStorage.setItem('totalCost',product.price)
-    }
-    
+function totalCost(product) {
+  let cartCost = localStorage.getItem("totalCost");
+  if (cartCost != null) {
+    cartCost = parseInt(cartCost);
+    localStorage.setItem("totalCost", cartCost + product.price);
+  } else {
+    localStorage.setItem("totalCost", product.price);
+  }
 }
-let productContainer = document.querySelector('.cart-box')
-function displayCart(){
-    let cartItems = localStorage.getItem('productsInCart');
-    let cartCost = localStorage.getItem('totalCost')
-    cartItems = JSON.parse(cartItems)
-    if(cartItems){
-        productContainer.innerHTML = ``;
-        Object.values(cartItems).map(item=>{
-            productContainer.innerHTML += `
+let productContainer = document.querySelector(".cart-box");
+function displayCart() {
+  let cartItems = localStorage.getItem("productsInCart");
+  let cartCost = localStorage.getItem("totalCost");
+  cartItems = JSON.parse(cartItems);
+  if (cartItems) {
+    productContainer.innerHTML = ``;
+    Object.values(cartItems).map((item) => {
+      productContainer.innerHTML += `
             <li class="cart-row">
             <a href="#" class="cart-item">
               <div class="img-box">
-                <img src="${item.image}" alt="product image" class="product-img" width="50" height="50"
+                <img src="${
+                  item.image
+                }" alt="product image" class="product-img" width="50" height="50"
                   loading="lazy">
               </div>
           
@@ -159,10 +162,9 @@ function displayCart(){
             
           </li>
           
-            `
-
-        })
-        productContainer.innerHTML += `
+            `;
+    });
+    productContainer.innerHTML += `
         <div class="cart-btn-group">
           <div class="cart-total">
             <strong class="cart-total-title">Total</strong>
@@ -171,21 +173,17 @@ function displayCart(){
           <button class="btn btn-primary">Order</button>
         </div>
 
-        `
-
-    }
-    const orderButton = productContainer.querySelector('.btn-primary');
-    const cart_TotalPrice = document.querySelector('.cart-total-price')
-    let TotalPriceValue = parseInt(cart_TotalPrice.textContent.replace("$",''))
-    orderButton.addEventListener('click',()=>{
-        localStorage.clear()
-        alert('Thank you for your order')
-        document.querySelector('.count').textContent = 0
-        productContainer.remove()
-        location.reload()
-    })
-    
+        `;
+  }
+  const orderButton = productContainer.querySelector(".btn-primary");
+  orderButton.addEventListener("click", () => {
+    localStorage.clear();
+    alert("Thank you for your order");
+    document.querySelector(".count").textContent = 0;
+    productContainer.remove();
+    location.reload();
+  });
 }
 
-onLoadCartNumbers()
-displayCart()
+onLoadCartNumbers();
+displayCart();
